@@ -9,7 +9,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public'), { index: 'index.html' }));
+
 
 app.post('/buscar-socio', async (req, res) => {
   const { documento } = req.body;
