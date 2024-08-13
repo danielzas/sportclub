@@ -11,13 +11,17 @@ app.use(express.json());
 app.use(cors());
 
 // Configurar Helmet para agregar políticas de seguridad
+// Configurar Helmet para agregar políticas de seguridad
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'none'"],
-      fontSrc: ["'self'", "https://sportclub-pinq.onrender.com"],
-      scriptSrc: ["'self'"],
-      styleSrc: ["'self'"],
+      defaultSrc: ["'self'", "https:"],  // Permitir todo desde el mismo origen y HTTPS
+      fontSrc: ["'self'", "https:", "data:"],  // Permitir fuentes desde el mismo origen, HTTPS y data URIs
+      scriptSrc: ["'self'"],  // Permitir scripts desde el mismo origen
+      styleSrc: ["'self'", "https:"],  // Permitir estilos desde el mismo origen y HTTPS
+      imgSrc: ["'self'", "https:", "data:"],  // Permitir imágenes desde el mismo origen, HTTPS y data URIs
+      connectSrc: ["'self'", "https:"],  // Permitir conexiones desde el mismo origen y HTTPS
+
     },
   })
 );
