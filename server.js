@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
+const helmet = require('helmet');  // Importar helmet
 
 const app = express();
 const port = 3000;
@@ -9,6 +10,17 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
+// Configurar Helmet para agregar políticas de seguridad
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'none'"],
+      fontSrc: ["'self'", "https://sportclub-pinq.onrender.com"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'"],
+    },
+  })
+);
 
 
 app.post('/buscar-socio', async (req, res) => {
