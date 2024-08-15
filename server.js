@@ -13,17 +13,10 @@ app.use(cors());
 // Configura CSP con Helmet
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'"],  // Default fallback para todos los recursos
-    fontSrc: [
-      "'self'", 
-      'https://sportclub-pinq.onrender.com', 
-      'https://cdn.jsdelivr.net'  // Asegúrate de incluir todos los dominios necesarios para las fuentes
-    ],
-    scriptSrc: [
-      "'self'",
-      'https://cdn.jsdelivr.net'  // Permite scripts desde tu CDN
-    ]
-    // Puedes agregar más directivas según sea necesario
+    defaultSrc: ["'self'"],  // Si deseas cambiar esto, asegúrate de no usar 'none' si no es intencional
+    fontSrc: ["'self'", 'https://sportclub-pinq.onrender.com', 'https://cdn.jsdelivr.net'],  // Asegura que estos dominios estén permitidos para las fuentes
+    scriptSrc: ["'self'", 'https://cdn.jsdelivr.net']  // Permite scripts desde CDN jsDelivr
+    // Agrega o ajusta más directivas según sea necesario
   }
 }));
 
