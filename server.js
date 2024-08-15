@@ -10,13 +10,16 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-// Configura CSP con Helmet
+// Configura CSP con Helmet para asegurar la coherencia y evitar conflictos
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'"],  // Si deseas cambiar esto, asegúrate de no usar 'none' si no es intencional
-    fontSrc: ["'self'", 'https://sportclub-pinq.onrender.com', 'https://cdn.jsdelivr.net'],  // Asegura que estos dominios estén permitidos para las fuentes
-    scriptSrc: ["'self'", 'https://cdn.jsdelivr.net']  // Permite scripts desde CDN jsDelivr
-    // Agrega o ajusta más directivas según sea necesario
+    defaultSrc: ["'self'"],  // Fallback default
+    fontSrc: ["'self'", "https://sportclub-pinq.onrender.com", "https://cdn.jsdelivr.net"],  // Permite fuentes de estos dominios
+    scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://sportclub-pinq.onrender.com"],  // Permite scripts de estos dominios
+    connectSrc: ["'self'", "https://sportclub-pinq.onrender.com"],  // Permite conexiones a estos dominios (para Axios)
+    imgSrc: ["'self'", "data:"],  // Permite imágenes del mismo origen y data URIs
+    styleSrc: ["'self'", "https://cdn.jsdelivr.net"]  // Permite estilos del mismo origen y CDN
+    // Puedes agregar más directivas según sea necesario
   }
 }));
 
